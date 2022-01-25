@@ -174,7 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        //\App\Providers\WidgetServiceProvider::class,
+        \App\Providers\WidgetServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Pyaesone17\ActiveState\ActiveStateServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
