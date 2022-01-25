@@ -12,7 +12,7 @@
     <!-- Main CSS-->
 
 
-    <link rel="stylesheet" type="text/css" href="{{asset('css/backend/style2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/backend/style3.css')}}">
     <!-- Font-icon css-->
 
     <!--Dropzone -->

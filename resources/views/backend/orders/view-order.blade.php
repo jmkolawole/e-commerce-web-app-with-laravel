@@ -164,6 +164,7 @@
                 </div>
 
                 <div class="ui-widget-content" style="padding: 15px 10px!important;">
+                    @if($userDetails)
                     {{$userDetails->name}}<br>
                     {{$userDetails->address}}<br>
                     {{$userDetails->town}}<br>
@@ -174,6 +175,9 @@
                     @endif
                     {{$userDetails->email}}<br>
                     {{$userDetails->phone_number}}<br>
+                   @else
+                    <h3>No longer Available</h3>
+                   @endif
                 </div>
 
             </div>
@@ -187,6 +191,7 @@
                     <h5 class="card-title m-b-0">Shipping Address</h5>
                 </div>
                 <div class="ui-widget-content" style="padding: 15px 10px!important;">
+            @if($shippingAddress)
                     {{$shippingAddress->name}}<br>
                     {{$shippingAddress->address}}<br>
                     {{$shippingAddress->town}}<br>
@@ -205,6 +210,9 @@
                    {{$shippingAddress->note}}
                 </div>
                  @endif
+            @else
+                 <h3>No longer Available</h3>
+            @endif
 
             </div>
             <!-- card new -->
@@ -234,14 +242,12 @@
                             <td>{{$pro->product_code}}</td>
                             <td>
 
-                                {{$pro->product_name}}
 
-                                @if($pro->attribute_id != 0)
-                                <?php
-                            $name = \App\Attribute::where('id',$pro->attribute_id)->first();
-                            ?>
-                                    <span>({{$name->color}})</span>
-                                @endif
+                                {{$pro->product_name}}<span>
+                                        @if($pro->attribute_name)
+                                    ({{$pro->attribute_name}})</span>
+                                        @endif
+
                             </td>
                             <td>₦{{$pro->product_price}}</td>
                             <td>{{$pro->product_qty}}</td>

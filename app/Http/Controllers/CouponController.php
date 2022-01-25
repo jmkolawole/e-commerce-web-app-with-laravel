@@ -34,14 +34,13 @@ class CouponController extends Controller
     }
 
     public function viewCoupons(){
-        $coupons = Coupon::get();
+        $coupons = Coupon::orderBy('id','desc')->paginate(3);
         return view('backend.coupons.view_coupons')->with(compact('coupons'));
     }
 
 
     public function editCoupon(Request $request, $id=null){
         if($request->isMethod('post')){
-            $data= $request->all();
             $data= $request->all();
             $coupon = Coupon::find($id);
             $coupon->coupon_code = $data['coupon_code'];

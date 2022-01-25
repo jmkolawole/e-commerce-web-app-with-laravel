@@ -35,7 +35,7 @@
                             <td>{{$product->product_name}}</td>
                         </tr>
                         <tr>
-                            <td><b>Product Code:</b</td>
+                            <td><b>Product Code:</b></td>
                             <td>{{$product->product_code}}</td>
                         </tr>
                         <tr>
@@ -123,7 +123,7 @@
                 var id = '<?php echo $id?>';
                 //Redirect URL
                 setTimeout(function () {
-                    window.location.replace('/alvinsmakeup/public/admin/product/' + id + '/add-images')
+                    window.location.replace('/admin/product/' + id + '/add-images')
                 }, 1000);
             });
         });

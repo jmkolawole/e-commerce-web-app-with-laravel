@@ -393,9 +393,23 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        ProductView::where('product_id',$id)->delete();
-        $product->delete();
         $pictures = Picture::where('product_id', '=', $product->id)->get();
+
+
+        //Delete views
+        $views = ProductView::where('product_id',$id)->get();
+        foreach($views as $view){
+            $view->delete();
+        }
+
+        //Delete attributes
+        $attributes = Attribute::where('product_id',$id)->get();
+        if($attributes){
+            foreach($attributes as $attribute){
+                $attribute->delete();
+            }
+        }
+
 
         $large_image_src = 'images/backend/products/large/';
         $medium_image_src = 'images/backend/products/medium/';
@@ -443,6 +457,8 @@ class ProductController extends Controller
             unlink($video_src . $product->video);
         }
         }
+
+        $product->delete();
 
         Session::flash('deleted', 'The product has been deleted successfully!');
         return redirect()->route('view.products');
@@ -603,7 +619,7 @@ class ProductController extends Controller
         }
 
         if($request->body == ""){
-            $body = "Please check out our new and exciting products from Alvinsmakeup";
+            $body = "Please check out our new and exciting product(s) from Alvinsmakeup";
         }else{
             $body = $request->body;
         }
@@ -618,8 +634,8 @@ class ProductController extends Controller
         //Send Newsletter here
         $subscribers = Subscriber::where('status', 1)->get();
         foreach($subscribers as $subscriber){
-            dispatch(new sendNewsletterEmail($subscriber,$products,$topic,$body));
-          //  Mail::to($subscriber->email)->send(new Newletters($subscriber,$products,$topic,$body));
+            //dispatch(new sendNewsletterEmail($subscriber,$products,$topic,$body));
+          Mail::to($subscriber->email)->send(new Newletters($subscriber,$products,$topic,$body));
         }
 
 

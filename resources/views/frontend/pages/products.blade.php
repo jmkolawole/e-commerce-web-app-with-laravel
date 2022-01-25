@@ -10,8 +10,9 @@ Brands Such As Milani, Tara, Revlon, Mary')
 <?php
 $image = \App\Product::latest()->first();
 ?>
+@if($image)
 @section('og_image',asset('images/backend/products/small/'.$image->image))
-
+@endif
 
 @section('content')
     <div class="breadcrumb-area">

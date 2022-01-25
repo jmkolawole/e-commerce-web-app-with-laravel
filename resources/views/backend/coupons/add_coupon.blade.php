@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <label for="amount" class="col-sm-12  control-label col-form-label">Amount</label>
                             <div class="col-sm-12">
-                                <input type="number" class="form-control" id="amount" name="amount" placeholder="amount" required min="1">
+                                <input type="number" class="form-control" id="amount" name="amount" step="0.01"placeholder="amount" required min="1">
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@
 
                     <div class="border-top">
                         <div class="card-body">
-                            <button type="submit" class="btn btn-primary">Add Coupon</button>
+                            <button type="submit" class="btn btn-success">Add Coupon</button>
                         </div>
                     </div>
                 </div>

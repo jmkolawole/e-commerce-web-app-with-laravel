@@ -16,34 +16,35 @@ class BannerController extends Controller
         $banner = Banner::find(1);
         if($request->isMethod('post')){
 
+            if($banner){
+                $old_slider1 = $banner->slider1;
+                $slider1_filename = '';
+                //Slider2
+                $old_slider2 = $banner->slider2;
+                $slider2_filename = '';
+                //Slider3
+                $old_slider3 = $banner->slider3;
+                $slider3_filename = '';
+    
+                //Banner1
+                $old_banner1 = $banner->banner1;
+                $banner1_filename = '';
+    
+                //Banner2
+                $old_banner2 = $banner->banner2;
+                $banner2_filename = '';
+    
+                //Banner2
+                $old_banner3 = $banner->banner3;
+                $banner3_filename = '';
+            }
             //Slider1
-            $old_slider1 = $banner->slider1;
-            $slider1_filename = '';
-            //Slider2
-            $old_slider2 = $banner->slider2;
-            $slider2_filename = '';
-            //Slider3
-            $old_slider3 = $banner->slider3;
-            $slider3_filename = '';
-
-            //Banner1
-            $old_banner1 = $banner->banner1;
-            $banner1_filename = '';
-
-            //Banner2
-            $old_banner2 = $banner->banner2;
-            $banner2_filename = '';
-
-            //Banner2
-            $old_banner3 = $banner->banner3;
-            $banner3_filename = '';
+            
 
 
 
 
             //Banners
-
-
             $banner->topic1 = $request->topic1;
             $banner->body1 = $request->body1;
 

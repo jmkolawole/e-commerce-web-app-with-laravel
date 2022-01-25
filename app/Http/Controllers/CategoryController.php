@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use Session;
 use Illuminate\Support\Str;
+use App\ProductView;
+use App\Attribute;
 
 class CategoryController extends Controller
 {
@@ -105,16 +107,90 @@ class CategoryController extends Controller
 
 
     public function deleteCategory($id){
-
+        //Delete Products
         $category = Category::find($id);
+
+        if($category->parent_id == 0){
+            //First find sub categories
         $sub_cats = Category::where('parent_id',$category->id)->get();
+
         foreach($sub_cats as $cat){
+
+
+            //Find products
+            $products = Product::where('category_id',$cat->id)->get();
+
+            foreach ($products as $product){
+                //Delete views
+                $views = ProductView::where('product_id',$product->id)->get();
+                $attributes = Attribute::where('product_id',$id)->get();
+
+                if($views){
+                    foreach($views as $view){
+                        //Delete view
+                        $view->delete();
+                      }
+                }
+
+                //Delete Attributes
+                if($attributes){
+                    foreach($attributes as $attribute){
+                        $attribute->delete();
+                    }
+                }
+
+
+
+                //Delete product
+                $product->delete();
+
+
+            }
+
+            //Delete categories
             $cat->delete();
         }
+
+        //Delete the category itself
         $category->delete();
+
+        }else{
+            $products = Product::where('category_id',$id)->get();
+            foreach ($products as $product){
+                $views = ProductView::where('product_id',$product->id)->get();
+                $attributes = Attribute::where('product_id',$id)->get();
+
+                if($views){
+                    foreach($views as $view){
+                        //Delete view
+                        $view->delete();
+                      }
+                }
+
+                //Delete Attributes
+                if($attributes){
+                    foreach($attributes as $attribute){
+                        $attribute->delete();
+                    }
+                }
+                 //Delete Product
+                $product->delete();
+            }
+
+            //Delete Category itself
+
+            $category->delete();
+        }
+
+        //$products->delete();
+
+        //$category->delete();
         Session::flash('deleted','Category Deleted Successfully');
         return redirect()->route('categories');
     }
+
+
+
 
 
     public function showProducts($url){

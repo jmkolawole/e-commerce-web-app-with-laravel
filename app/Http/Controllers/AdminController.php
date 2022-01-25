@@ -30,24 +30,65 @@ class AdminController extends Controller
 
         $admins = User::where('id','<>',1)->orderBy('id','desc')->take(5)->get();
 
+        $orders = Order::with('orders')->orderBy('id','DESC')->take(5)->get();
+
 
         $current_month_products = Product::whereMonth('created_at',Carbon::now()->month)->count();
         $last_month_products = Product::whereMonth('created_at',Carbon::now()->subMonth(1))->count();
         $last_two_month_products = Product::whereMonth('created_at',Carbon::now()->subMonth(2))->count();
+        $last_three_month_products = Product::whereMonth('created_at',Carbon::now()->subMonth(3))->count();
+        $last_four_month_products = Product::whereMonth('created_at',Carbon::now()->subMonth(4))->count();
+        $last_five_month_products = Product::whereMonth('created_at',Carbon::now()->subMonth(5))->count();
 
-       // dd($last_month_products);
+        $product_array = array("month-1"=>$current_month_products,'month-2'=>$last_month_products,'month-3'=>$last_two_month_products,
+        'month-4'=>$last_three_month_products, 'month-5'=>$last_four_month_products, 'month-6'=>$last_five_month_products);
 
-        $current_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->month)->count();
-        $last_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(1))->count();
-        $last_two_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(2))->count();
+
+
+        $current_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->month)->where('status',1)->count();
+        $last_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(1))->where('status',1)->count();
+        $last_two_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(2))->where('status',1)->count();
+        $last_three_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(3))->where('status',1)->count();
+        $last_four_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(4))->where('status',1)->count();
+        $last_five_month_subscribers = Subscriber::whereMonth('created_at',Carbon::now()->subMonth(5))->where('status',1)->count();
+
+        $subscriber_array = array("month-1"=>$current_month_subscribers,'month-2'=>$last_month_subscribers,'month-3'=>$last_two_month_subscribers,
+        'month-4'=>$last_three_month_subscribers, 'month-5'=>$last_four_month_subscribers, 'month-6'=>$last_five_month_subscribers);
+
+
 
         $current_month_orders = Order::whereMonth('created_at',Carbon::now()->month)->count();
         $last_month_orders = Order::whereMonth('created_at',Carbon::now()->subMonth(1))->count();
         $last_two_month_orders = Order::whereMonth('created_at',Carbon::now()->subMonth(2))->count();
+        $last_three_month_orders = Order::whereMonth('created_at',Carbon::now()->subMonth(3))->count();
+        $last_four_month_orders = Order::whereMonth('created_at',Carbon::now()->subMonth(4))->count();
+        $last_five_month_orders = Order::whereMonth('created_at',Carbon::now()->subMonth(5))->count();
 
-        $current_month_sales = Order::whereMonth('created_at',Carbon::now()->month)->sum('grand_total');
-        $last_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(1))->sum('grand_total');
-        $last_two_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(2))->sum('grand_total');
+        $order_array = array("month-1"=>$current_month_orders,'month-2'=>$last_month_orders,'month-3'=>$last_two_month_orders,
+        'month-4'=>$last_three_month_orders, 'month-5'=>$last_four_month_orders, 'month-6'=>$last_five_month_orders);
+
+
+        $current_month_sales = Order::whereMonth('created_at',Carbon::now()->month)
+        ->where(function($q){$q->where('order_status','Shipped')->orWhere('order_status','Delivered');})->sum('grand_total');
+
+        $last_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(1))
+        ->where(function($q){$q->where('order_status','Shipped')->orWhere('order_status','Delivered');})->sum('grand_total');
+
+        $last_two_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(2))
+        ->where(function($q){$q->where('order_status','Shipped')->orWhere('order_status','Delivered');})->sum('grand_total');
+
+        $last_three_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(3))
+        ->where(function($q){$q->where('order_status','Shipped')->orWhere('order_status','Delivered');})->sum('grand_total');
+
+        $last_four_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(4))
+        ->where(function($q){$q->where('order_status','Shipped')->orWhere('order_status','Delivered');})->sum('grand_total');
+
+        $last_five_month_sales = Order::whereMonth('created_at',Carbon::now()->subMonth(5))
+        ->where(function($q){$q->where('order_status','Shipped')->orWhere('order_status','Delivered');})->sum('grand_total');
+
+        $sale_array = array("month-1"=>$current_month_sales,'month-2'=>$last_month_sales,'month-3'=>$last_two_month_sales,
+        'month-4'=>$last_three_month_sales, 'month-5'=>$last_four_month_sales, 'month-6'=>$last_five_month_sales);
+
 
 
         $categories_count = Category::all()->count();
@@ -57,10 +98,11 @@ class AdminController extends Controller
         $products = Product::orderBy('id','desc')->take(5)->get();
         $brands = Brand::orderBy('id','desc')->take(5)->get();
         $categories = Category::with('products')->where('parent_id','<>', 0)->orderBy('id','desc')->take(6)->get();
-        return view('backend.dashboard')->with(compact('count','current_month_subscribers','last_month_subscribers',
-            'last_two_month_subscribers','current_month_products','last_month_products','last_two_month_products','categories_count',
-            'products_count','brands_count','products','categories','brands','admins','current_month_orders','last_month_orders','last_two_month_orders',
-            'current_month_sales','last_two_month_sales','last_month_sales'));
+
+
+
+        return view('backend.dashboard')->with(compact('count','categories_count','products_count','brands_count',
+        'products','categories','brands','admins','product_array','subscriber_array','orders','order_array','sale_array'));
     }
 
 
@@ -140,7 +182,6 @@ class AdminController extends Controller
     //Show all the users apart from the owner of the website
     public function showUsers(){
 
-        Session::flash('success',' User info updated successfully!');
         $users = User::where('id','<>',1)->get();
         return view('backend.auth.show_users')->withUsers($users);
     }
@@ -328,6 +369,35 @@ class AdminController extends Controller
     public function subscribers(){
         $subscribers = Subscriber::paginate(30);
         return view('backend.subscribers.index')->with(compact('subscribers'));
+    }
+
+    public function deactivateSubscriber($id=null){
+
+        $subscriber = Subscriber::find($id);
+        $subscriber->status = 0;
+        $subscriber->save();
+        Session::flash('success',' Deactivation Successful!');
+        return redirect()->back();
+
+    }
+
+
+    public function activateSubscriber($id=null){
+        $subscriber = Subscriber::find($id);
+        $subscriber->status = 1;
+        $subscriber->save();
+        Session::flash('success',' Activation Successful!');
+        return redirect()->back();
+
+    }
+
+
+    public function deleteSubscriber($id=null){
+        $subscriber = Subscriber::find($id)->first();
+        $subscriber->delete();
+        Session::flash('success',' Subscriber Deleted Successful!');
+        return redirect()->back();
+
     }
 
 

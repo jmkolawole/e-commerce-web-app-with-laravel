@@ -9,10 +9,10 @@
                     <div class="header-top-left order-2 order-lg-1">
                         <ul>
                             <li>
-                                <a href="#"><i class="fa fa-phone"></i> +2348027871372</a>
+                                <a href="tel:+2348027871372"><i class="fa fa-phone"></i> +2348027871372</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-envelope-open-o"></i> support@alvinsmakeup.com</a>
+                                <a href="mailto:support@alvinsmakeup.com"><i class="fa fa-envelope-open-o"></i> support@alvinsmakeup.com</a>
                             </li>
                             <li>
                                 <ul class="social-icon">
@@ -40,7 +40,7 @@
                     <div class="header-top-right order-1 order-lg-2">
                         <ul>
                             <li>
-                                <a href="#">Setting
+                                <a href="#">Settings
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <!-- Dropdown Start -->
@@ -88,7 +88,7 @@
                 <div class="col-xl-3 col-lg-2 col-6">
                     <div class="logo">
                         <a href="{{route('home')}}">
-                            <img src="{{asset('images/frontend/logo.png')}}" alt="logo-image">
+                            <img src="{{asset('images/frontend/logo1.png')}}" alt="logo-image">
                         </a>
                     </div>
                 </div>

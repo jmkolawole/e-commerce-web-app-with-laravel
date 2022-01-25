@@ -53,7 +53,7 @@
 
 
                     <button type="submit" class="btn btn-success">
-                        Create <i class="fa fa-arrow-right ml-2"></i>
+                        Update <i class="fa fa-arrow-right ml-2"></i>
                     </button>
 
                 </form>

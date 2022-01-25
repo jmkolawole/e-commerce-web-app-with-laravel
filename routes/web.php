@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -209,6 +210,11 @@ Route::group(['middleware' => 'web'], function () {
 
             //Subscribers
             Route::get('admin/subscribers','AdminController@subscribers')->name('subscribers');
+            Route::get('admin/delete-subscriber/{id}','AdminController@deleteSubscriber')->name('delete.subscriber');
+            Route::get('admin/deactivate-subscriber/{id}','AdminController@deactivateSubscriber')->name('deactivate.subscriber');
+            Route::get('admin/activate-subscriber/{id}','AdminController@activateSubscriber')->name('activate.subscriber');
+
+
 
             //Export Email
             Route::get('admin/export-subscribers-email','SubscriberController@exportSubscriberEmail')->name('export.email');
@@ -244,6 +250,8 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('/admin/order/view-invoice/{id}',['uses' => 'OrderController@viewOrderInvoice', 'as' => 'view.invoice']);
 
             Route::post('/admin/update-order-status',['uses' => 'OrderController@orderStatus', 'as' => 'order.status']);
+
+            Route::get('/admin/delete-order/{id}',['uses' => 'OrderController@deleteOrder', 'as' => 'delete.order']);
 
 
             //Reviews

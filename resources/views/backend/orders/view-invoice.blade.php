@@ -35,9 +35,13 @@
                         <address><strong>Alvinsmakeup</strong><br>Ibrahim Taiwo Road<br>Ilorin<br>Kwara State<br>Email: support@alvinsmakeup.com</address>
                     </div>
                     <div class="col-4">To
+                        @if($shippingAddress)
                         <address><strong>{{$shippingAddress->first_name.' '. $shippingAddress->last_name}}</strong><br>
                             {{$shippingAddress->address}}<br>{{$shippingAddress->town}} {{$shippingAddress->state}},
                             {{$shippingAddress->country}}<br>Phone: {{$shippingAddress->phone_number}}<br>Email: {{$shippingAddress->email}}</address>
+                        @else
+                            <h3>No longer Available</h3>
+                        @endif
                     </div>
                     <div class="col-4"><b>Order ID: {{$orderDetails->id}}</b><br><br><b>Order Date: </b> {{date('M j, Y h:ia',strtotime($orderDetails->created_at))}}<br></div>
                 </div>
@@ -61,7 +65,7 @@
                             @foreach($orderDetails->orders as $pro)
                             <tr>
                                 <td>{{$pro->product_qty}}</td>
-                                <td>{{$pro->product_name}}</td>
+                                <td>{{$pro->product_name}}@if($pro->attribute_name) ({{$pro->attribute_name}}) @endif</td>
                                 <td>{{$pro->product_code}}</td>
                                 <td>₦{{$pro->product_price}}</td>
                                 <td>₦{{$pro->product_price * $pro->product_qty}}</td>

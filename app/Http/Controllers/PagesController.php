@@ -397,7 +397,7 @@ class PagesController extends Controller
 
 
     public function getProductType(Request $request){
-
+           
         $data = $request->all();
         //echo "<pre>";print_r($data);die;
         $proArr = explode("#",$data['idSize']);
@@ -974,7 +974,7 @@ class PagesController extends Controller
         }
         $output .= '</div><div class="cart-footer">
                                                     <ul class="price-content">
-                                                        
+
                                                         <li>Total
                                                             <span>₦'. $total_amount.'</span>
                                                         </li>
@@ -1041,7 +1041,6 @@ class PagesController extends Controller
 
     public function checkout(Request $request){
         $countries = Country::get();
-
         if(Auth::guard('visitor')->check()) {
             $user_id = Auth::guard('visitor')->user()->id;
             $userDetails = Visitor::where('id',$user_id)->first();
@@ -1135,7 +1134,6 @@ class PagesController extends Controller
                     return \redirect()->route('order.review');
 
 
-
                 }else{
                     Session::flash('failure', ' Please Fill Out All Compulsory Fields!');
                     return back();
@@ -1166,111 +1164,135 @@ class PagesController extends Controller
 
 
     public function orderReview(Request $request){
-
         $ship = Session::get('shipping');
         $bill = Session::get('billing');
 
+       
         $billingDetails = $bill;
         $shippingDetails = $ship;
 
+        if($billingDetails != null || $shippingDetails != null){
 
-
-        $removed = "";
-
-
+            $removed = "";
         if(Auth::guard('visitor')->check()){
             $alert = "";
             $user_id = Auth::guard('visitor')->user()->id;
             $cart_products = DB::table('carts')->where(['user_id'=>$user_id])->orderBy('id','desc')->get();
-            foreach ($cart_products as $product){
-                $id = $product->product_id;
-                $item = Product::where('id',$id)->first();
-                if ($item){
-                    $stock = 0;
-                    if($item->stock_status == "yes"){
 
-                        $value = Attribute::where('id',$product->attribute_id)->where('product_id',$id)->first();
-                        $stock = $value->stock;
-                        $deleted = DB::table('carts')->where('user_id',$user_id)->where('product_id',$id)->
-                        where('attribute_id',$value->id)->first();
+            if($cart_products->count() != 0){
+                foreach ($cart_products as $product){
+                    $id = $product->product_id;
+                    $item = Product::where('id',$id)->first();
+                    if ($item){
+                        $stock = 0;
+                        if($item->stock_status == "yes"){
 
-                        if ($deleted->quantity > $stock){
-                            DB::table('carts')->where('id',$deleted->id)->delete();
-                            $alert = "yes";
+                            $value = Attribute::where('id',$product->attribute_id)->where('product_id',$id)->first();
+                            $stock = $value->stock;
+                            $deleted = DB::table('carts')->where('user_id',$user_id)->where('product_id',$id)->
+                            where('attribute_id',$value->id)->first();
+
+                            if ($deleted->quantity > $stock){
+                                DB::table('carts')->where('id',$deleted->id)->delete();
+                                $alert = "yes";
+
+                            }
+
+                        }else{
+                            $stock = $item->stock;
+                            $deleted = DB::table('carts')->where('user_id',$user_id)->where('product_id',$id)->
+                            where('attribute_id',0)->first();
+
+                            if($deleted->quantity > $stock){
+                                DB::table('carts')->where('id',$deleted->id)->delete();
+                                $alert = "yes";
+
+                            }
 
                         }
-
                     }else{
-                        $stock = $item->stock;
-                        $deleted = DB::table('carts')->where('user_id',$user_id)->where('product_id',$id)->
-                        where('attribute_id',0)->first();
-
-                        if($deleted->quantity > $stock){
-                            DB::table('carts')->where('id',$deleted->id)->delete();
-                            $alert = "yes";
-
-                        }
-
+                        $removed = "yes";
                     }
-                }else{
-                    $removed = "yes";
+
+
                 }
 
+                if ($alert == "yes"){
+                    Session::flash('failure', 'One Or More Of The Items Is/Are Not Available In The Requested Quantity. Please Re-add Items To Your Cart!');
+                    return \redirect()->route('cart');
+                }
 
-            }
+            }else{
 
-            if ($alert == "yes"){
-                Session::flash('failure', 'One Or More Of The Items Is/Are Not Available In The Requested Quantity. Please Re-add Items To Your Cart!');
+                Session::flash('failure', 'You need to have items in your cart to access this page!');
                 return \redirect()->route('cart');
             }
+
+
         }else{
             $session_id = Session::get('session_id');
             $alert = "";
             $cart_products = DB::table('carts')->where(['session_id'=>$session_id])->orderBy('id','desc')->get();
+            if($cart_products->count() != 0){
 
-            foreach ($cart_products as $product){
-                $id = $product->product_id;
-                $item = Product::where('id',$id)->first();
-                if ($item){
-                    $stock = 0;
-                    if($item->stock_status == "yes"){
+                foreach ($cart_products as $product){
+                    $id = $product->product_id;
+                    $item = Product::where('id',$id)->first();
+                    if ($item){
+                        $stock = 0;
+                        if($item->stock_status == "yes"){
 
-                        $value = Attribute::where('id',$product->attribute_id)->where('product_id',$id)->first();
-                        $stock = $value->stock;
-                        $deleted = DB::table('carts')->where('session_id',$session_id)->where('product_id',$id)->
-                        where('attribute_id',$value->id)->first();
+                            $value = Attribute::where('id',$product->attribute_id)->where('product_id',$id)->first();
+                            $stock = $value->stock;
+                            $deleted = DB::table('carts')->where('session_id',$session_id)->where('product_id',$id)->
+                            where('attribute_id',$value->id)->first();
 
-                        if ($deleted->quantity > $stock){
-                            DB::table('carts')->where('id',$deleted->id)->delete();
-                            $alert = "yes";
+                            if ($deleted->quantity > $stock){
+                                DB::table('carts')->where('id',$deleted->id)->delete();
+                                $alert = "yes";
+
+                            }
+
+                        }else{
+                            $stock = $item->stock;
+                            $deleted = DB::table('carts')->where('session_id',$session_id)->where('product_id',$id)->
+                            where('attribute_id',0)->first();
+
+                            if($deleted->quantity > $stock){
+                                DB::table('carts')->where('id',$deleted->id)->delete();
+                                $alert = "yes";
+
+                            }
 
                         }
-
                     }else{
-                        $stock = $item->stock;
-                        $deleted = DB::table('carts')->where('session_id',$session_id)->where('product_id',$id)->
-                        where('attribute_id',0)->first();
-
-                        if($deleted->quantity > $stock){
-                            DB::table('carts')->where('id',$deleted->id)->delete();
-                            $alert = "yes";
-
-                        }
-
+                        $removed = "yes";
                     }
-                }else{
-                    $removed = "yes";
+
+
                 }
 
+                if ($alert == "yes"){
+                    Session::flash('failure', 'One Or More Of The Items Is/Are Not Available In The Requested Quantity. Please Re-add Items To Your Cart!');
+                    return \redirect()->route('cart');
+                }
 
-            }
+            }else{
 
-            if ($alert == "yes"){
-                Session::flash('failure', 'One Or More Of The Items Is/Are Not Available In The Requested Quantity. Please Re-add Items To Your Cart!');
+                Session::flash('failure', 'You need to have items in your cart to access this page!');
                 return \redirect()->route('cart');
+
             }
+
+
 
         }
+        }else{
+            Session::flash('failure', 'You need fill in your billing and shipping details!');
+            return \redirect()->route('checkout');
+        }
+
+
 
 
         return view('frontend.pages.order-review')->with(compact('billingDetails','shippingDetails','cart_products'));
@@ -1368,7 +1390,7 @@ class PagesController extends Controller
 
 
     public function processOrder(){
-
+        
 
         $ship = Session::get('shipping');
         $bill = Session::get('billing');
@@ -1376,9 +1398,7 @@ class PagesController extends Controller
         $shippingDetails = $ship;
         $billingDetails = $bill;
 
-
-
-
+  
         if(Auth::guard('visitor')->check()){
             $user_id = Auth::guard('visitor')->user()->id;
             $cart_products = DB::table('carts')->where(['user_id'=>$user_id])->orderBy('id','desc')->get();
@@ -1386,6 +1406,7 @@ class PagesController extends Controller
             $session_id = Session::get('session_id');
             $cart_products = DB::table('carts')->where(['session_id'=>$session_id])->orderBy('id','desc')->get();
         }
+        
 
         //$cart_products = DB::table('carts')->where(['session_id'=>$session_id])->orderBy('id','desc')->get();
 
@@ -1557,8 +1578,7 @@ class PagesController extends Controller
                 $order->user_id = null;
                 $order->session_id = $session_id;
             }
-
-
+ 
             $order->name = $shippingDetails[2].' '.$shippingDetails[3];
             $order->order_status = "New";
             $order->total_amount = $total_amount;
@@ -1618,7 +1638,14 @@ class PagesController extends Controller
 
             foreach($cartProducts as $pro){
                 $cartPro = new OrdersProduct;
+                if($pro->attribute_id){
                 $cartPro->attribute_id = $pro->attribute_id;
+                $attribute = Attribute::where('id',$pro->attribute_id)->first();
+                $cartPro->attribute_name = $attribute->color;
+                }
+                else{
+                $cartPro->attribute_name = "";
+                }
                 if(Auth::guard('visitor')->check()){
                     $user_id = Auth::guard('visitor')->user()->id;
                     $cartPro->user_id = $user_id;
@@ -1627,7 +1654,6 @@ class PagesController extends Controller
                     $cartPro->user_id = null;
                     $cartPro->session_id = $session_id;
                 }
-
 
                 $cartPro->order_id = $order_id;
                 $cartPro->product_code = $pro->product_code;
@@ -1669,7 +1695,6 @@ class PagesController extends Controller
             }
 
 
-
             //Delete From Cart
             if(Auth::guard('visitor')->check()){
                 $user_id = Auth::guard('visitor')->user()->id;
@@ -1694,11 +1719,11 @@ class PagesController extends Controller
 
 
 
-
             //Send Email;
-           dispatch(new sendUserInvoice($orderDetails));
-           dispatch(new sendAdmInvoice($orderDetails,$billingAddress));
-
+           //dispatch(new sendUserInvoice($orderDetails));
+           //dispatch(new sendAdmInvoice($orderDetails,$billingAddress));
+           //Mail::to($orderDetails->email)->send(new UserInvoice($orderDetails));
+           //Mail::to('sales@alvinsmakeup.com')->send(new AdmInvoice($orderDetails,$billingAddress));
 
 
             Session::put('order_id',$order_id);
@@ -1707,13 +1732,7 @@ class PagesController extends Controller
             Session::flash('success', 'Order Successful!');
             return \redirect()->route('thank.you');
 
-
         }
-
-
-
-
-
 
 
     }

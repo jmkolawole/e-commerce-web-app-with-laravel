@@ -49,7 +49,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="">
-    <link href="{{asset('css/frontend/css/style9.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/frontend/css/style10.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="">

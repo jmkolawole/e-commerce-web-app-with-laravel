@@ -18,7 +18,7 @@ class OrderController extends Controller
 
     public function viewOrders(){
 
-        $orders = Order::with('orders')->orderBy('id','DESC')->get();
+        $orders = Order::with('orders')->orderBy('id','DESC')->paginate(2);
         return view('backend.orders.view-orders')->with(compact('orders'));
 
     }
@@ -57,5 +57,12 @@ class OrderController extends Controller
 
         //For Array Return
         return Excel::download(new OrderExport(), 'orders.xlsx');
+    }
+
+    public function deleteOrder($id = null){
+        $order = Order::find($id);
+        $order->delete();
+        Session::flash('success',' Order Deleted Successfully!');
+        return redirect()->back();
     }
 }

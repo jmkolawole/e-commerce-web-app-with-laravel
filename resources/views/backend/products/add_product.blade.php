@@ -101,7 +101,7 @@
                         </div>
 
                     </div>
-                    <div class="tile-footer"><button class="btn btn-primary" type="submit">Create</button></div>
+                    <div class="tile-footer"><button class="btn btn-success" type="submit">Create</button></div>
                 </div>
             </div>
 

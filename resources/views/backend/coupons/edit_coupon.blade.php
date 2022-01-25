@@ -39,7 +39,7 @@
                     <div class="form-group row">
                         <label for="amount" class="col-sm-12  control-label col-form-label">Amount</label>
                         <div class="col-sm-12">
-                            <input type="number" class="form-control" id="amount" name="amount" value="{{$couponDetails->amount}}" required min="1">
+                            <input type="number" class="form-control" id="amount" step="0.01" name="amount" value="{{$couponDetails->amount}}" required min="1">
                         </div>
                     </div>
 

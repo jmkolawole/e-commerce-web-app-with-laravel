@@ -142,8 +142,8 @@
                                     </a>
                                 </div>
                                 <div class="btn-group" style="float: right!important;position: relative;right: 5%;">
-                                    <button type="button" class="btn btn-primary">Action</button>
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" class="btn btn-success">Action</button>
+                                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu">

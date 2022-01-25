@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-6">
                             <div class="d-single-info">
-                                <p>E-mail them at </p>
+                                <p>E-mail us at </p>
                                 <p>support@alvinsmakeup.com</p>
                             </div>
                         </div>
@@ -87,8 +87,11 @@
                                             <td><a class="view" href="{{route('view.visitor.order',$order->id)}}">view</a></td>
                                         </tr>
                                             @endforeach
+
                                         </tbody>
                                     </table>
+
+                                    <div style="margin-top:20px">{{$orders->links()}}</div>
                                 </div>
                             </div>
 

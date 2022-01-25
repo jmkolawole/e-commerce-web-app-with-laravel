@@ -1,3 +1,6 @@
+
+
+
 @extends('frontend.layouts.master')
 @section('title', 'Contact Us | Alvins Makeup')
 @section('description', 'Contact Us At Alvins Makeup For Enquiries on Authentic Makeup, Beauty And Cosmetic Products')
@@ -8,7 +11,9 @@
 <?php
 $image = \App\Banner::where('id',1)->first();
 ?>
+@if($image)
 @section('og_image',asset('images/backend/banners/'.$image->banner2))
+@endif
 
 @section('content')
     <div class="breadcrumb-area">
@@ -22,7 +27,7 @@ $image = \App\Banner::where('id',1)->first();
     <!-- Breadcrumb Area End Here -->
     <!-- Google Map Start -->
 
-    <div class="goole-map">
+    <div class="google-map">
         <div id="map"></div>
     </div>
     <!-- Google Map End -->
@@ -80,20 +85,18 @@ $image = \App\Banner::where('id',1)->first();
 <script>
     function initMap() {
         var myLatLng = {lat: 8.480003, lng: 4.538651};
-
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 16,
             center: myLatLng
         });
-
         var marker = new google.maps.Marker({
             position: myLatLng,
             map: map,
             title: 'Hello World!'
         });
     }
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYHW-fTqr5oP-Uw4LjySWp3Af_7XAJD5w&callback=initMap"
-        async defer></script>
-
-
+<script defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvEwOkdPIvwy6ZVLAyKlcmI2ubtspJE-s&callback=initMap">
+</script>

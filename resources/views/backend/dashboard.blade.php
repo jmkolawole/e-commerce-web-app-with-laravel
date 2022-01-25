@@ -51,140 +51,277 @@
          $current_month = date('M');
          $last_month = date('M',strtotime('-1 month'));
          $last_two_month = date('M',strtotime('-2 month'));
+         $last_three_month = date('M',strtotime('-3 month'));
+         $last_four_month = date('M',strtotime('-4 month'));
+         $last_five_month = date('M',strtotime('-5 month'));
+
+         //$categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
          ?>
 
 
 
-        <script>
-
-            window.onload = function () {
-
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    theme: "light1",
-                    title:{
-                        text: "Product Reports"
-                    },
-                    axisY:{
-                        title: "Products"
-                    },
-                    data: [{
-                        type: "column",
-                        showInLegend: true,
-                        legendMarkerColor: "grey",
-                        legendText: "Monthly Product Uploads",
-                        dataPoints: [
-                            { y: {{$last_two_month_products}}, 'label': '{{$last_two_month}}'},
-                            { y: {{$last_month_products}} , 'label': '{{$last_month}}'},
-                            { y: {{$current_month_products}} , 'label': '{{$current_month}}'},
-
-                        ]
-                    }]
-                });
-                chart.render();
 
 
-                var subscriber = new CanvasJS.Chart("chartContainer2", {
-                    animationEnabled: true,
-                    theme: "light2",
-                    color: "#800000",
-                    title:{
-                        text: "Subscriber Reports"
-                    },
-                    axisY:{
-                        title: "No of Subscribers"
-                    },
-                    data: [{
-                        type: "line",
-                        dataPoints: [
-                            { y: {{$last_two_month_subscribers}}, 'label': '{{$last_two_month}}'},
-                            { y: {{$last_month_subscribers}} , 'label': '{{$last_month}}'},
-                            { y: {{$current_month_subscribers}} , 'label': '{{$current_month}}'},
 
-                        ]
-                    }]
-                });
-                subscriber.render();
+<div class="row">
+    <div class="col-md-6">
+        <div class="tile">
+            <div id="chart1" style="height: 420px; width: 100%;"></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="tile">
 
-                var order = new CanvasJS.Chart("chartContainer4", {
-                    animationEnabled: true,
-                    theme: "light2",
-                    title:{
-                        text: "Orders Report"
-                    },
-                    axisY:{
-                        title: "No of Orders"
-                    },
-                    data: [{
-                        type: "column",
-                        dataPoints: [
-                            { y: {{$last_two_month_orders}}, 'label': '{{$last_two_month}}'},
-                            { y: {{$last_month_orders}} , 'label': '{{$last_month}}'},
-                            { y: {{$current_month_orders}} , 'label': '{{$current_month}}'},
+            <div id="chart2" style="height: 420px; width: 100%;"></div>
 
-                        ]
-                    }]
-                });
-                order.render();
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="tile">
+            <div id="chart3" style="height: 420px; width: 100%;"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6" style="max-height: 70%!important;">
+        <div class="tile">
+            <div id="chart4" style="height: 420px; width: 100%;"></div>
+        </div>
+    </div>
 
 
-                var sale = new CanvasJS.Chart("chartContainer3", {
-                    animationEnabled: true,
-                    theme: "light1",
-                    color: "#546BC1",
-                    title:{
-                        text: "Sales Report"
-                    },
-                    axisY:{
-                        title: "Sales In ₦"
-                    },
-                    data: [{
-                        type: "line",
-                        dataPoints: [
-                            { y: {{$last_two_month_sales}}, 'label': '{{$last_two_month}}'},
-                            { y: {{$last_month_sales}} , 'label': '{{$last_month}}'},
-                            { y: {{$current_month_sales}} , 'label': '{{$current_month}}'},
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.2/apexcharts.min.js"></script>
+<script>
+    var options = {
+        series: [{
+        name: 'Products Uploaded',
+        data: [
+                {{$product_array['month-6']}},
+                {{$product_array['month-5']}},
+                {{$product_array['month-4']}},
+                {{$product_array['month-3']}},
+                {{$product_array['month-2']}},
+                {{$product_array['month-1']}}
 
-                        ]
-                    }]
-                });
-                sale.render();
+            ]
+      },],
+        chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '55%',
+          endingShape: 'rounded'
+        },
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+      },
+      title: {
+            text: 'Products uploaded by month',
+            align: 'left'
+        },
+      xaxis: {
+        categories: ['{{$last_five_month}}', '{{$last_four_month}}', '{{$last_three_month}}',
+            '{{$last_two_month}}','{{$last_month}}','{{$current_month}}'],
+      },
+      yaxis: {
+        title: {
+          text: '# (products)'
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return val + " products"
+          }
+        }
+      }
+    };
+
+    var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
+    chart1.render();
 
 
+
+    var options = {
+        series: [{
+            name: "Subscribers",
+            data: [
+                {{$subscriber_array['month-6']}},
+                {{$subscriber_array['month-5']}},
+                {{$subscriber_array['month-4']}},
+                {{$subscriber_array['month-3']}},
+                {{$subscriber_array['month-2']}},
+                {{$subscriber_array['month-1']}}
+
+            ]
+        }],
+        chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+                enabled: false
             }
-        </script>
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Verified Subscribers',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: ['{{$last_five_month}}', '{{$last_four_month}}', '{{$last_three_month}}',
+            '{{$last_two_month}}','{{$last_month}}','{{$current_month}}'],
+        }
+    };
 
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="tile">
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="tile">
-
-            <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-
-        </div>
-    </div>
-</div>
-<div class="row">
-
-    <div class="col-md-6">
-        <div class="tile">
-            <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="tile">
-            <div id="chartContainer4" style="height: 370px; width: 100%;"></div>
-        </div>
-    </div>
+    var chart2 = new ApexCharts(document.querySelector("#chart2"), options);
+    chart2.render();
 
 
-</div>
+
+
+
+    var options = {
+        series: [{
+            name: "Ordered Products per month",
+            data: [
+                {{$order_array['month-6']}},
+                {{$order_array['month-5']}},
+                {{$order_array['month-4']}},
+                {{$order_array['month-3']}},
+                {{$order_array['month-2']}},
+                {{$order_array['month-1']}}
+            ]
+        }],
+        chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Orders made per month',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: ['{{$last_five_month}}', '{{$last_four_month}}', '{{$last_three_month}}',
+            '{{$last_two_month}}','{{$last_month}}','{{$current_month}}'],
+        }
+    };
+
+
+    var chart3 = new ApexCharts(document.querySelector("#chart3"), options);
+    chart3.render();
+
+
+
+    var options = {
+        series: [
+                {{$sale_array['month-6']}},
+                {{$sale_array['month-5']}},
+                {{$sale_array['month-4']}},
+                {{$sale_array['month-3']}},
+                {{$sale_array['month-2']}},
+                {{$sale_array['month-1']}}
+            ],
+        labels: ['{{$last_five_month}}', '{{$last_four_month}}', '{{$last_three_month}}',
+            '{{$last_two_month}}','{{$last_month}}','{{$current_month}}'],
+        chart: {
+        type: 'donut',
+      },
+      title: {
+            text: 'Sales per month',
+            align: 'left'
+        },
+      plotOptions: {
+    pie: {
+      customScale: 0.8
+    }
+  },
+
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return "#" + val;
+          }
+        }
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
+      };
+
+
+    var chart4 = new ApexCharts(document.querySelector("#chart4"), options);
+    chart4.render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
 
 
 <div class="row">
@@ -385,6 +522,66 @@
 
     @endif
 </div>
+
+<div class="row" style="margin-top:40px">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Recent Orders</h5>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                        <table id="my_Table" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>Customer Name</th>
+                                    <th>Customer Email</th>
+                                    <th>Ordered Products</th>
+                                    <th>Order Amount</th>
+                                    <th>Order Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td>{{$order->id}}</td>
+                                        <td>{{date('M j, Y h:ia',strtotime($order->created_at))}}</td>
+                                        <td>{{$order->name}}</td>
+                                        <td>{{$order->email}}</td>
+
+                                        <td>@foreach($order->orders as $pro)
+                                                <a href="">{{$pro->product_code}} <span style="color:red">({{$pro->product_qty}})</span></a><br>
+                                            @endforeach</td>
+                                        <td>₦{{round($order->grand_total,2)}}</td>
+                                        <td>{{$order->order_status}}</td>
+                                        <td class="-align-center">
+                                            <a type="button" href="{{route('view.order',$order->id)}}"
+                                               class="btn btn-cyan btn-sm d-inline-block" target="_blank">View Order</a>
+
+                                            <a style="display: inline!important;margin-top: 5px" type="button" href="{{route('view.invoice',$order->id)}}"
+                                               class="btn btn-success btn-sm d-inline-block" target="_blank">View Invoice</a>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                <tr>
+                            <td colspan="9"><a href="{{route('view.orders')}}" class="btn btn-outline-dark float-right">View More</a></td>
+                            </tr>
+
+                                </tbody>
+
+
+                            </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><br><br>
+
 
 
 

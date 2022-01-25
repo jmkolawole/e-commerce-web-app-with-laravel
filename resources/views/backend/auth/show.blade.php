@@ -123,7 +123,7 @@
                                 <br>
                                 <div class="row mb-12">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
                                     </div>
                                 </div>
                             </form>

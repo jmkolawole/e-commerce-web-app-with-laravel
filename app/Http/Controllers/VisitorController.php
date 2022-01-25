@@ -65,7 +65,7 @@ class VisitorController extends Controller
                     }
 
                     //Trigger Mail.
-                    Session::flash('success', 'Registration Successful. Please Check Your Mailbox And Verify Your Account!');
+                    Session::flash('success', 'Registration Successful. Please Check Your Mailbox, Verify Your Account And Complete Your Registration!');
                     return redirect()->route('home');
                 }
 
@@ -231,7 +231,7 @@ class VisitorController extends Controller
         if(Auth::guard('visitor')->check()){
             $user_id = Auth::guard('visitor')->user()->id;
             $user = Visitor::where('id',$user_id)->first();
-            $orders = Order::with('orders')->where('user_id',$user_id)->get();
+            $orders = Order::with('orders')->where('user_id',$user_id)->orderBy('id','desc')->paginate(15);
             $countries = Country::get();
 
         }else{
@@ -311,12 +311,11 @@ class VisitorController extends Controller
     public function getLogout( Request $request)
     {
         //dd($request);
-
         //Auth::logout();
         //Session::flash('success',' You have been logged out!');
         if(Auth::guard('visitor')->check()) {
             Auth::guard('visitor')->logout();
-             //$request->session()->flush();
+             $request->session()->forget('session_id');
              //$request->session()->regenerate();
             Session::flash('success', 'Logged Out Successfully!');
             return redirect()->route('login.user');

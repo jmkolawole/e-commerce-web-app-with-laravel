@@ -219,7 +219,7 @@
 
                                     <tr>
                                         <th>Coupon Discount</th>
-                                        <td><span class=" total amount">₦{{$coupon_amount}} {{$coupon_rate}}</span>
+                                        <td><span class=" total amount">@if($coupon_amount)-@endif  ₦{{$coupon_amount}} {{$coupon_rate}}</span>
                                         </td>
                                     </tr>
                                     <tr class="order-total">

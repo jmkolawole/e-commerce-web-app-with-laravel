@@ -7,13 +7,14 @@
                 <div class="col-lg-5 col-md-6 mb-all-30">
                     <div class="single-footer">
                         <div class="footer-logo mb-20">
-                            <a href="#"><img class="img" src="{{asset('images/frontend/logo.png')}}" alt="logo-img"></a>
+                            <a href="#"><img class="img" src="{{asset('images/frontend/logo1.png')}}" alt="logo-img"></a>
                         </div>
                         <div class="footer-content">
                             <ul class="footer-list first-content">
                                 <li><i class="pe-7s-map-marker"></i> 279 Ibrahim Taiwo Road Ilorin, Kwara State.
                                 </li>
-                                <li><i class="pe-7s-call"></i>08027871372 || 08155197711</li>
+                                <li><i class="pe-7s-call"></i> <span><a href="tel:08027871372" style="display:inline">08027871372</a></span>
+                                    || <span><a href="tel:08155197711" style="display:inline">08155197711</a></span></li>
                                 <li><i class="pe-7s-clock"></i>Working time: 9.00 - 18.00</li>
                                 <li class="mt-20">
                                     <ul class="social-icon">
@@ -131,6 +132,7 @@
         //alert('yeah');
         $("#btnSubmit").show();
         $('#statusSubscribe').hide();
+        $('#subscribed').hide();
     }
 
 

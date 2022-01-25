@@ -232,40 +232,7 @@
                                 </div>
                             </table>
 
-                            <style>
-                                .shop-breadcrumb-area.border-default {
-                                    padding: 20px;
-                                }
-
-                                .pfolio-breadcrumb-list li {
-                                    display: inline;
-                                }
-
-                                .pfolio-breadcrumb-list li a {
-                                    font-size: 14px;
-                                    font-weight: 400;
-                                    padding: 0 5px;
-                                }
-
-                                .pfolio-breadcrumb-list li.active a {
-                                    color: #7b7b7b;
-                                }
-
-                                .pfolio-breadcrumb-list li i {
-                                    font-size: 16px;
-                                }
-
-                                .pfolio-breadcrumb-list li.prev a i {
-                                    margin-right: 4px!important;
-                                }
-                                .pfolio-breadcrumb-list li.next a i {
-                                    margin-left: 4px!important;
-                                }
-                                .pfolio-breadcrumb-list li:hover a {
-                                    color: #c7b270;
-                                }
-                            </style>
-
+                            
                             <div class="shop-breadcrumb-area border-default mt-30">
                                 <div class="center" style="text-align: center!important;">
                                     <div style="display: inline!important;">

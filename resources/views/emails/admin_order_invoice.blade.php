@@ -187,13 +187,10 @@
             @foreach($orderDetails->orders as $pro)
                 <tr class="item">
                     <td>
-                        {{$pro->product_name}}
-                        @if($pro->attribute_id != 0)
-                            <?php
-                            $name = \App\Attribute::where('id',$pro->attribute_id)->first();
-                            ?>
-                            <span>({{$name->color}})</span>
-                        @endif
+                            {{$pro->product_name}}<span>
+                                    @if($pro->attribute_name)
+                                ({{$pro->attribute_name}})</span>
+                                    @endif
                     </td>
                     <td>{{$pro->product_code}}</td>
                     <td>₦{{$pro->product_price}}</td>

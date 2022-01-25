@@ -9,12 +9,13 @@ Beauty Products In Nigeria. Alvins Makeup Is Located In Ilorin, Nigeria.')
 <?php
 $image = \App\Product::latest()->first();
 ?>
+@if($image)
 @section('og_image',asset('images/backend/products/small/'.$image->image))
-
-
+@endif
 
 @section('content')
     <div class="slider-div">
+        @if ($banners)
         <div class="slider-activate owl-carousel">
             <div class="slide align-center-left fullscreen animation-style-01 bg-image-1" style="background-image: url({{asset('images/backend/banners/'.$banners->slider1)}})">
                 <div class="slider-progress"></div>
@@ -70,7 +71,9 @@ $image = \App\Product::latest()->first();
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
+        @endif
+        
     </div>
 
 
@@ -79,6 +82,7 @@ $image = \App\Product::latest()->first();
         <div class="container">
             <div class="row">
                 <!--  Single Banner Area Start -->
+                @if($banners)
                 <div class="col-lg-4 col-md-4 mb-sm-30">
                     <div class="single-banner zoom">
                         <a href="{{route('products')}}">
@@ -105,6 +109,8 @@ $image = \App\Product::latest()->first();
                     </div>
                 </div>
                 <!--  Single Banner Area End -->
+                @endif
+                
             </div>
         </div>
     </div>
@@ -1196,5 +1202,7 @@ $image = \App\Product::latest()->first();
 
 
 @endsection
+
+
 
 
