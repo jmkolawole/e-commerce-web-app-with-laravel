@@ -7,7 +7,7 @@ Products From Your Favourite Brands At AlvinsMakeup')
 @section('og_url',url('/about'))
 @section('og_description','Alvins Makeup Nigeria: Buy Makeup, Cosmetics And Skincare')
 <?php
-$image = \App\Banner::where('id',1)->first();
+$image = \App\Banner::where('id',2)->first();
 ?>
 @section('og_image',asset('images/backend/banners/'.$image->banner1))
 

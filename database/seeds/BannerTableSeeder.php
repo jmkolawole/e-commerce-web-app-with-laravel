@@ -18,7 +18,6 @@ class BannerTableSeeder extends Seeder
         $banner->slider2 = "alvinsmakeup631.jpg";
         $banner->slider3 = "alvinsmakeup9746.jpg";
 
-
         $banner->banner1 = "alvinsmakeup3053.jpg";
         $banner->banner2 = "alvinsmakeup3960.jpg";
         $banner->banner3 = "alvinsmakeup2774.jpg";
