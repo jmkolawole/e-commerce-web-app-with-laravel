@@ -55,7 +55,7 @@ class PagesController extends Controller
         $new_arrivals = Product::where('status',1)->orderBy('id','desc')->take(6)->get();
         $new_arrivals2 = Product::where('status',1)->orderBy('id','desc')->skip(6)->take(6)->get();
         $arrival_count = $new_arrivals->count();
-        $banners = Banner::where('id',1)->first();
+        $banners = Banner::where('id',2)->first();
         $groups = Category::with('products')->where('parent_id',0)->withCount('products')->orderBy('products_count','desc')->take(4)->get();
         $specials = Product::where('featured',1)->orderBy('id','desc')->take(6)->get();
 
