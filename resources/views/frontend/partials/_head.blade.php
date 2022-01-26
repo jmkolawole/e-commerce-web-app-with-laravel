@@ -14,46 +14,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link href="{{asset('css/frontend/css/img/favicon.ico')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/img/favicon.ico')}}" rel="stylesheet" type="text/css">
 
     <!-- Fontawesome css -->
-    <link href="{{asset('css/frontend/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Animate css -->
-    <link href="{{asset('css/frontend/css/animate.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/animate.css')}}" rel="stylesheet" type="text/css">
 
     <!-- 7-stroke fonts css -->
-    <link href="{{asset('css/frontend/css/pe-icon-7-stroke.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/pe-icon-7-stroke.min.css')}}" rel="stylesheet" type="text/css">
 
 
     <!-- Jquery fancybox css -->
-    <link href="{{asset('css/frontend/css/jquery.fancybox.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/jquery.fancybox.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Jquery ui price slider css -->
-    <link href="{{asset('css/frontend/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Meanmenu css -->
     <link rel="stylesheet" href="">
-    <link href="{{asset('css/frontend/css/meanmenu.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/meanmenu.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Owl carousel css -->
-    <link href="{{asset('css/frontend/css/owl.carousel.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/owl.carousel.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap css -->
-    <link href="{{asset('css/frontend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Custom css -->
-    <link href="{{asset('css/frontend/css/default.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/default.css')}}" rel="stylesheet" type="text/css">
 
-    <link href="{{asset('css/frontend/css/accordion.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/accordion.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Main css -->
     <link rel="stylesheet" href="">
-    <link href="{{asset('css/frontend/css/style10.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/style10.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Responsive css -->
     <link rel="stylesheet" href="">
-    <link href="{{asset('css/frontend/css/responsive1.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('css/frontend/css/responsive1.css')}}" rel="stylesheet" type="text/css">
 
-    <link href="{{asset('js/frontend/js/vendor/modernizr-3.5.0.min.js')}}" rel="stylesheet" type="text/css">
+    <link href="{{secure_asset('js/frontend/js/vendor/modernizr-3.5.0.min.js')}}" rel="stylesheet" type="text/css">
 </head>

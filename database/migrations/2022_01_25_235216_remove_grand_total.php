@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditOrdersTableEditGrandTotalColumn extends Migration
+class RemoveGrandTotal extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class EditOrdersTableEditGrandTotalColumn extends Migration
         //
         Schema::table('orders', function (Blueprint $table) {
             //
-            $table->drop('grand_total')->change();
+            $table->dropColumn('grand_total');
         });
     }
 
@@ -30,7 +30,7 @@ class EditOrdersTableEditGrandTotalColumn extends Migration
         //
         Schema::table('orders', function (Blueprint $table) {
             //
-            //$table->string('grand_total')->change();
+            $table->integer('grand_total');
         });
     }
 }
