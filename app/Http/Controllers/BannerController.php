@@ -13,7 +13,7 @@ class BannerController extends Controller
 
     public function addBanner(Request $request){
 
-        $banner = Banner::find(2);
+        $banner = Banner::find(1);
         if($request->isMethod('post')){
 
             if($banner){
