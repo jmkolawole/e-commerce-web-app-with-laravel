@@ -542,7 +542,7 @@ function addToCart(clicked) {
 
     $.ajax({
         type:'get',
-        url: "http://localhost:8000/cart/addItem/"+pro_id,
+        url: "http://alvins-ecommerce.herokuapp.com/cart/addItem/"+pro_id,
         data: {quantity:quantity,price:price,product_name:product_name,product_code:product_code,type:type,attrId:attrId},
         success:function (resp) {
             if(resp == "Saved"){
@@ -580,7 +580,7 @@ function getProductType(clicked) {
     
     $.ajax({
         type:'get',
-        url: "http://localhost:8000/get-product-type",
+        url: "http://alvins-ecommerce.herokuapp.com/get-product-type",
         data: {idSize:item},
         success:function (resp) {
 
@@ -620,7 +620,7 @@ function getProductType(clicked) {
 
 function loadCartData() {
     $.ajax({
-        url:"http://localhost:8000/fetch-cart",
+        url:"http://alvins-ecommerce.herokuapp.com/fetch-cart",
         method:"POST",
         success:function(data)
         {
@@ -653,7 +653,7 @@ function addToWishlist(clicked) {
 
     $.ajax({
         type:'get',
-        url: "http://localhost/alvinsmakeup/public/wishlist/addItem/"+pro_id,
+        url: "http://alvins-ecommerce.herokuapp.com/wishlist/addItem/"+pro_id,
         data: {price:price,product_name:product_name,product_code:product_code,type:type,attrId:attrId},
         success:function (resp) {
             if (resp == "Saved") {
@@ -694,7 +694,7 @@ function addToCompare(clicked) {
 
     $.ajax({
         type:'get',
-        url: "http://localhost/alvinsmakeup/public/compare/addItem/"+pro_id,
+        url: "http://alvins-ecommerce.herokuapp.com/compare/addItem/"+pro_id,
         data: {price:price,product_name:product_name,product_code:product_code,type:type,attrId:attrId},
         success:function (resp) {
             if (resp == "Saved") {
@@ -725,7 +725,7 @@ function wishToCart(clicked, attr) {
 
     $.ajax({
         type:'get',
-        url: "http://localhost/alvinsmakeup/public/wishToCart/"+pro_id,
+        url: "http://alvins-ecommerce.herokuapp.com/wishToCart/"+pro_id,
         data: {quantity:quantity,price:price,product_name:product_name,product_code:product_code,attrId:product_attr},
         success:function (resp) {
             if(resp == "Saved"){
@@ -756,7 +756,7 @@ function compareToCart(clicked,attr) {
     //alert(product_attr);
     $.ajax({
         type:'get',
-        url: "http://localhost/alvinsmakeup/public/compareToCart/"+pro_id,
+        url: "http://alvins-ecommerce.herokuapp.com/compareToCart/"+pro_id,
         data: {quantity:quantity,price:price,product_name:product_name,product_code:product_code,attrId:product_attr},
         success:function (resp) {
             if(resp == "Saved"){
@@ -791,7 +791,7 @@ function deleteCompare(id,clicked,attr) {
         if(e){
             $.ajax({
                 type:'get',
-                url: "http://localhost/alvinsmakeup/public/deleteCompare/"+pro_id,
+                url: "http://alvins-ecommerce.herokuapp.com/deleteCompare/"+pro_id,
                 success:function (resp) {
                     if (resp == "deleted") {
                         $('.item_'+clicked+'_'+attr).hide();
@@ -828,7 +828,7 @@ function deleteList(clicked) {
             $.ajax({
                 type:'get',
 
-                url: "http://localhost/alvinsmakeup/public/deleteWish/"+pro_id,
+                url: "http://alvins-ecommerce.herokuapp.com/deleteWish/"+pro_id,
 
                 success:function (resp) {
 
