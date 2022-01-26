@@ -1,7 +1,7 @@
 <head>
     <meta name="description" content="">
     <title>Alvinsmakeup</title>
-    <link rel="icon" type="image/png" href="{{asset('images/favicon.ico')}}">
+    <link rel="icon" type="image/png" href="{{secure_asset('images/favicon.ico')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
     <!-- Main CSS-->
 
 
-    <link rel="stylesheet" type="text/css" href="{{asset('css/backend/style3.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('css/backend/style3.css')}}">
     <!-- Font-icon css-->
 
     <!--Dropzone -->
