@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('postcode');
             $table->string('phone');
             $table->string('order_status');
-            $table->string('grand_total');
+            $table->float('grand_total');
             $table->timestamps();
         });
     }
