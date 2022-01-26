@@ -761,7 +761,6 @@ function compareToCart(clicked,attr) {
         success:function (resp) {
             if(resp == "Saved"){
                 swal('Success!',"Item Successfully Added To Cart",'success');
-
             }
             else if(resp == "Not Available"){
                 swal('Error!',"The Requested Item Is Not Yet Available Or Product Is Out Of Stock",'error');

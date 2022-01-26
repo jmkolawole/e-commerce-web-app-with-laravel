@@ -33,13 +33,10 @@ class WidgetServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
         $categories = Category::where('parent_id', '=', 0)->where('status', 1)->get();
         $category_count = $categories->count();
 
-
         $brands = Brand::where('status', 1)->get();
-
 
         $colorsArray = Product::select('product_color')->groupBy('product_color')->get();
         $colorsArray = json_decode(json_encode($colorsArray), true);
@@ -93,8 +90,6 @@ class WidgetServiceProvider extends ServiceProvider
                     ->where('session_id','<>',null)->orderBy('id','desc')->count();
                 */
             }
-
-
 
 
             $view->with('cart_count', $cart_count);
